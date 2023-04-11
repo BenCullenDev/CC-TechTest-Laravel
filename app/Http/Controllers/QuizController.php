@@ -27,7 +27,7 @@ public function store(Request $request)
     for ($i = 1; $i <= 3; $i++) {
         $questions[] = [
             'content' => $request->input("question{$i}_content"),
-            'answer' => $request->input("question{$i}_answer") == "yes",
+            'answer' => $request->input("question{$i}_answer") === "yes",
         ];
     }
 
@@ -35,6 +35,7 @@ public function store(Request $request)
 
     return redirect()->route('quizzes.index');
 }
+
 
 public function show(Quiz $quiz)
 {
@@ -47,5 +48,28 @@ public function destroy(Quiz $quiz)
     return redirect()->route('quizzes.index');
 }
 
+public function edit(Quiz $quiz)
+{
+    return view('edit', compact('quiz'));
+}
+
+public function update(Request $request, Quiz $quiz)
+{
+    $quiz->update($request->only('name'));
+
+    foreach ($quiz->questions as $index => $question) {
+        $question->update([
+            'content' => $request->input("question{$index}_content"),
+            'answer' => $request->input("question{$index}_answer") == "yes",
+        ]);
+    }
+
+    return redirect()->route('quizzes.show', $quiz);
+}
+
+public function take(Quiz $quiz)
+{
+    return view('take', compact('quiz'));
+}
 
 }

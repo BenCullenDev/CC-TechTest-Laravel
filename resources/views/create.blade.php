@@ -22,16 +22,25 @@
                 <label for="name">Quiz Name:</label>
                 <input type="text" name="name" id="name" class="form-control">
             </div>
-            @for($i = 1; $i <= 3; $i++)
-                <div class="form-group">
-                    <label for="question{{ $i }}_content">Question {{ $i }}:</label>
-                    <input type="text" name="question{{ $i }}_content" id="question{{ $i }}_content" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="question{{ $i }}_answer">Answer (yes/no):</label>
-                    <input type="text" name="question{{ $i }}_answer" id="question{{ $i }}_answer" class="form-control">
-                </div>
-            @endfor
+           <!-- ... -->
+@foreach(range(1, 3) as $i)
+    <div class="form-group">
+        <label for="question{{ $i }}_content">Question {{ $i }}:</label>
+        <input type="text" name="question{{ $i }}_content" id="question{{ $i }}_content" class="form-control" required>
+        <div class="mt-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="question{{ $i }}_answer" id="question{{ $i }}_answer_yes" value="yes" required>
+                <label class="form-check-label" for="question{{ $i }}_answer_yes">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="question{{ $i }}_answer" id="question{{ $i }}_answer_no" value="no">
+                <label class="form-check-label" for="question{{ $i }}_answer_no">No</label>
+            </div>
+        </div>
+    </div>
+@endforeach
+<!-- ... -->
+
             <button type="submit" class="btn btn-primary">Create Quiz</button>
         </form>
     </div>

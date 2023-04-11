@@ -17,9 +17,12 @@
         <h1 class="my-4">Quizzes</h1>
         <a href="{{ route('quizzes.create') }}" class="btn btn-primary mb-3">Create Quiz</a>
         <div class="list-group">
-            @foreach($quizzes as $quiz)
-                <a href="{{ route('quizzes.show', $quiz) }}" class="list-group-item list-group-item-action">{{ $quiz->name }}</a>
-            @endforeach
+        @foreach($quizzes as $quiz)
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{{ route('quizzes.show', $quiz) }}">{{ $quiz->name }}</a>
+        <a href="{{ route('quizzes.take', $quiz) }}" class="btn btn-primary btn-sm">Take Quiz</a>
+    </li>
+@endforeach
         </div>
     </div>
 </body>
