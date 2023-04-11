@@ -41,4 +41,11 @@ public function show(Quiz $quiz)
     return view('show', compact('quiz'));
 }
 
+public function destroy(Quiz $quiz)
+{
+    $quiz->delete();
+    return redirect()->route('quizzes.index');
+}
+
+
 }
